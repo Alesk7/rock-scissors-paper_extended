@@ -10,7 +10,7 @@ namespace rock_scissors_paper_extended
     {
         private const int NumberOfElements = 5;
         public readonly string[] Elements = new string[NumberOfElements]
-        { "Paper", "Rock", "Lizzard", "Spock", "Scissors"};
+        { "Paper", "Rock", "Lizzard", "Spock", "Scissors" };
 
         private int ComputerChoice;
         private int UserChoice;
@@ -20,6 +20,7 @@ namespace rock_scissors_paper_extended
         public void GenerateComputerChoice()
         {
             ComputerChoice = new Random().Next(0, NumberOfElements);
+            Console.WriteLine("Computer has made choice.");
         }
 
         public void SetUserChoice(int UserChoice)
@@ -41,8 +42,12 @@ namespace rock_scissors_paper_extended
             return -1;
         }
 
-        public void PrintChoices()
+        public void PrintResult(int Result)
         {
+            if (Result == 1) Console.WriteLine("\nYou win!\n".ToUpper());
+            else if (Result == -1) Console.WriteLine("\nYou lose :(\n".ToUpper());
+            else Console.WriteLine("\nDraw.\n".ToUpper());
+
             Console.WriteLine("User choice: " + Elements[UserChoice]);
             Console.WriteLine("Computer choice: " + Elements[ComputerChoice]);
         }
@@ -51,7 +56,7 @@ namespace rock_scissors_paper_extended
         {
             for (int i = 1; i <= NumberOfElements; i++)
                 Console.WriteLine(i + ". " + Elements[i - 1]);
-            Console.WriteLine("0. Exit\n");
+            Console.WriteLine();
         }
     }
 }
