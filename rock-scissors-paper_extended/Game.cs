@@ -12,6 +12,9 @@ namespace rock_scissors_paper_extended
         public readonly string[] Elements = new string[NumberOfElements]
         { "Paper", "Rock", "Lizzard", "Spock", "Scissors" };
 
+        public readonly int[,] Relationships = new int[NumberOfElements, NumberOfElements / 2]
+        { { 1, 3 }, { 2, 4 }, { 3, 0 }, { 4, 1 }, { 0, 2 } };
+
         private int ComputerChoice;
         private int UserChoice;
 
@@ -35,8 +38,7 @@ namespace rock_scissors_paper_extended
 
             for (int i = 0; i < NumberOfElements / 2; i++)
             {
-                int UserCanBeatElement = (((2 * (i + 1)) + UserChoice) - 1) % NumberOfElements;
-                if (ComputerChoice == UserCanBeatElement) return 1;
+                if (ComputerChoice == Relationships[UserChoice, i]) return 1;
             }
             
             return -1;
