@@ -8,10 +8,9 @@ namespace rock_scissors_paper_extended
 {
     class Game
     {
-        private const int NumberOfElements = 5;
+        public const int NumberOfElements = 5;
         public readonly string[] Elements = new string[NumberOfElements]
         { "Paper", "Rock", "Lizzard", "Spock", "Scissors" };
-
         private int ComputerChoice;
         private int UserChoice;
 
@@ -28,27 +27,23 @@ namespace rock_scissors_paper_extended
             this.UserChoice = UserChoice;
         }
 
-        /// <returns> 0 if nobody wins; 1 if user; -1 if comuter</returns>
+        /// <returns> 0 if nobody wins; 1 if user; -1 if computer</returns>
         public int CompareChoices()
         {
             if (UserChoice == ComputerChoice) return 0;
-
             for (int i = 0; i < NumberOfElements / 2; i++)
             {
                 int UserCanBeatElement = (((2 * (i + 1)) + UserChoice) - 1) % NumberOfElements;
                 if (ComputerChoice == UserCanBeatElement) return 1;
             }
-            
             return -1;
         }
 
         public void PrintResult(int Result)
         {
-            if (Result == 1) Console.WriteLine("\nYou win!\n".ToUpper());
-            else if (Result == -1) Console.WriteLine("\nYou lose :(\n".ToUpper());
-            else Console.WriteLine("\nDraw.\n".ToUpper());
-
-            Console.WriteLine("User choice: " + Elements[UserChoice]);
+            if (Result == 1) Console.WriteLine("You win!".ToUpper());
+            else if (Result == -1) Console.WriteLine("You lose :(".ToUpper());
+            else Console.WriteLine("Draw.".ToUpper());
             Console.WriteLine("Computer choice: " + Elements[ComputerChoice]);
         }
 
@@ -56,7 +51,7 @@ namespace rock_scissors_paper_extended
         {
             for (int i = 1; i <= NumberOfElements; i++)
                 Console.WriteLine(i + ". " + Elements[i - 1]);
-            Console.WriteLine();
+            Console.WriteLine("0. Exit");
         }
     }
 }

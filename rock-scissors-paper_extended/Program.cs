@@ -14,27 +14,25 @@ namespace rock_scissors_paper_extended
         static void Main(string[] args)
         {
             Game game = new Game();
-            Console.WriteLine("rock-scissors-paper extended game\n".ToUpper());
-
+            Console.WriteLine("rock-scissors-paper extended game".ToUpper());
             while (true)
             {
                 game.PrintMenu();
-
                 GenerateHMACKey();
                 game.GenerateComputerChoice();
-                Console.WriteLine("HMAC: " + GetHMAC(game.Elements[game.GetComputerChoice()]) + "\n");
-
+                Console.WriteLine("HMAC: " + GetHMAC(game.Elements[game.GetComputerChoice()]));
                 Console.Write("Make your choice: ");
                 int Choice = Int32.Parse(Console.ReadLine());
+                if (Choice > Game.NumberOfElements || Choice < 1)
+                {
+                    if (Choice == 0) break;
+                    Console.WriteLine("Wrong choice.");
+                    continue;
+                }
                 game.SetUserChoice(Choice - 1);
-
                 game.PrintResult(game.CompareChoices());
-                Console.WriteLine("HMAC: " + GetHMAC(game.Elements[game.GetComputerChoice()]) + "\n");
-
-                Console.Write("Play again? (y/n): ");
-                string PlayAgain = Console.ReadLine();
-                if (PlayAgain.Equals("n")) break;
-                Console.WriteLine("\n");
+                Console.WriteLine("KEY: " + BitConverter.ToString(HMAC.Key).Replace("-", string.Empty));
+                Console.WriteLine();
             }
         }
 
